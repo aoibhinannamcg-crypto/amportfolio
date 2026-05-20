@@ -9,6 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 
+    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -16,7 +20,7 @@
             box-sizing: border-box;
         }
         
-        html, body {
+        html, body, #root {
             width: 100%;
             height: 100%;
             background: #f5f2eb; /* Premium warm sand background */
@@ -39,7 +43,7 @@
             margin: 0 auto;
         }
         
-        h1, h2, .nav-logo, .metric-number, .testimonial-text {
+        h1, h2, h3, .nav-logo, .metric-number, .testimonial-text {
             font-family: 'Playfair Display', serif;
             font-weight: 400;
             letter-spacing: -0.01em;
@@ -68,6 +72,9 @@
             padding: 30px 40px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             background: #f5f2eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .nav-logo {
@@ -152,7 +159,7 @@
         
         .carousel-container {
             position: relative;
-            padding: 0 40px;
+            padding: 0 50px;
         }
         
         .carousel {
@@ -247,188 +254,18 @@
             top: 50%;
             transform: translateY(-50%);
             background: #f5f2eb;
-            border: 1px solid rgba(0,0,0,0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 54px;
+            height: 54px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            z-index: 50;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
         }
         
         .carousel-button:hover {
-            background: #1a1a1a;
-        }
-
-        .carousel-button:hover .carousel-button-icon {
-            color: #f5f2eb;
-        }
-        
-        .carousel-button-left { left: 8px; }
-        .carousel-button-right { right: 8px; }
-        
-        .carousel-button-icon {
-            width: 20px;
-            height: 20px;
-            color: #1a1a1a;
-        }
-
-        /* Testimonial Quote Section */
-        .testimonial-section {
-            background: #f5f2eb;
-            text-align: center;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-        }
-
-        .testimonial-wrapper {
-            max-width: 850px;
-            margin: 0 auto;
-            position: relative;
-            padding: 20px 0;
-        }
-
-        .testimonial-text {
-            font-size: 2rem;
-            line-height: 1.45;
-            color: #1a1a1a;
-            font-style: italic;
-            margin-bottom: 28px;
-        }
-
-        .testimonial-author {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: #6e6b64;
-            font-weight: 600;
-        }
-
-        /* Brand Grid Display Styling */
-        .clients-section {
-            background: #fbfaf7;
-            text-align: center;
-        }
-
-        .client-list-grid {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 48px;
-            margin-top: 20px;
-        }
-
-        .client-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: #2b2a27;
-            opacity: 0.85;
-            letter-spacing: 0.02em;
-        }
-
-        .client-separator {
-            width: 6px;
-            height: 6px;
-            background-color: rgba(0,0,0,0.2);
-            border-radius: 50%;
-        }
-        
-        footer {
-            padding: 60px 24px;
-            background: #f5f2eb;
-            text-align: center;
-            color: #6e6b64;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-        
-        @media (max-width: 767px) {
-            .intro-split {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 60px 24px;
-                text-align: center;
-            }
-            .intro-right {
-                border-left: none;
-                padding-left: 0;
-                gap: 24px;
-            }
-            .metric-number { font-size: 2.8rem; }
-            h1 { font-size: 2.5rem; }
-            .testimonial-text { font-size: 1.5rem; }
-            section { padding: 50px 24px; }
-            .carousel-button { display: none; }
-            .carousel-container { padding: 0; }
-            .client-list-grid { flex-direction: column; gap: 20px; }
-            .client-separator { display: none; }
-        }
-    </style>
-</head>
-<body>
-
-    <nav class="nav-header">
-        <a href="#" class="nav-logo">AOIBHIN M.</a>
-        <div class="nav-links">
-            <a href="#work">Featured Work</a>
-            <a href="#testimonials">Endorsements</a>
-            <a href="#clients">Clients</a>
-        </div>
-    </nav>
-
-    <div class="container">
-        <section class="intro-split">
-            <div class="intro-left">
-                <span class="subtitle">Content Creator & Strategist</span>
-                <h1>Aoibhin McGarry</h1>
-            </div>
-            <div class="intro-right">
-                <div class="metric-item">
-                    <span class="metric-number">130M+</span>
-                    <span class="metric-label">Total Organic Views Generated</span>
-                </div>
-                <div class="metric-item">
-                    <span class="metric-number">26.1M</span>
-                    <span class="metric-label">Highest Single Video Reach</span>
-                </div>
-            </div>
-        </section>
-    </div>
-    
-    <section id="work" class="videos-section">
-        <div class="container">
-            <h2>Featured Work</h2>
-            
-            <div class="carousel-container">
-                <div class="carousel" id="portfolioCarousel">
-                    <div class="video-card" onclick="window.open('https://www.tiktok.com/@dashburgerdublin/video/7246412323764636954', '_blank')">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" alt="Portfolio Frame" loading="lazy">
-                        <div class="video-overlay"><div class="video-stats"><span class="view-count">14.3M</span></div></div>
-                    </div>
-                    <div class="video-card" onclick="window.open('https://www.tiktok.com/@dashburgerdublin/video/7175089190856559878', '_blank')">
-                        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=500" alt="Portfolio Frame" loading="lazy">
-                        <div class="video-overlay"><div class="video-stats"><span class="view-count">26.1M</span></div></div>
-                    </div>
-                    <div class="video-card" onclick="window.open('https://www.tiktok.com/@dashburgerdublin/video/7238968276456459547', '_blank')">
-                        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=500" alt="Portfolio Frame" loading="lazy">
-                        <div class="video-overlay"><div class="video-stats"><span class="view-count">475.8K</span></div></div>
-                    </div>
-                    <div class="video-card" onclick="window.open('https://www.tiktok.com/@dashburgerdublin/video/7112050339410398469', '_blank')">
-                        <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500" alt="Portfolio Frame" loading="lazy">
-                        <div class="video-overlay"><div class="video-stats"><span class="view-count">2.1M</span></div></div>
-                    </div>
-                    <div class="video-card" onclick="window.open('https://www.tiktok.com/@jackiesdublin/video/7182222358105574662', '_blank')">
-                        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500" alt="Portfolio Frame" loading="lazy">
-                        <div class="video-overlay"><div class="video-stats"><span class="view-count">9.5M</span></div></div>
-                    </div>
-                    <div class="video-card" onclick="window.open('https://www.tiktok.com/@jackiesdublin/video/7096461898694020358', '_blank')">
-                        <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?w=500" alt="Portfolio Frame" loading="lazy">
-                        <div class="video-overlay"><div class="video-stats"><span class="view-count">11.5M</span></div></div>
-                    </div>
-                    <div class="video-card" onclick="window.open('https://www.tiktok.com/@jackiesdublin/video/7212962776996793606', '_blank')">
-                        <img src="https://
+            background: #1a1
