@@ -1,309 +1,420 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aoibhin McGarry | Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        body {
-            background: #f5f2eb;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            padding: 0 20px;
-        }
-        .carousel-wrapper {
-            position: relative;
+        
+        html, body, #root {
             width: 100%;
+            height: 100%;
+            background: #000000; /* Reverted back to your signature deep black theme */
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #ffffff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 24px;
         }
+
+        /* Top Minimalist Header Navigation */
+        .nav-header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 24px 40px;
+            background: transparent;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+        }
+        
+        /* Hero Tagline Block */
+        .hero-section {
+            text-align: center;
+            padding: 60px 0 40px 0;
+        }
+
+        .hero-tagline {
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.3;
+        }
+        
+        /* High Impact Stats Banner Row */
+        .stats-banner {
+            background: linear-gradient(180deg, rgba(15,15,15,0.5) 0%, rgba(5,5,5,0.8) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .main-stat-box {
+            margin-bottom: 40px;
+        }
+
+        .main-stat-number {
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            color: #ffffff;
+        }
+
+        .main-stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        .sub-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 900px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 40px;
+        }
+
+        .sub-stat-item {
+            position: relative;
+        }
+
+        .sub-stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sub-stat-number {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .sub-stat-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+        
+        /* Updated Video Carousel Container Markup */
+        .carousel-section {
+            padding: 20px 0 80px 0;
+        }
+        
+        .carousel-container {
+            position: relative;
+            padding: 0 50px;
+        }
+        
         .carousel {
             display: flex;
-            gap: 24px;
+            gap: 20px;
             overflow-x: auto;
-            padding: 30px 20px;
+            padding: 20px 0;
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
         }
+        
         .carousel::-webkit-scrollbar {
-            height: 4px;
+            height: 3px;
         }
+        
         .carousel::-webkit-scrollbar-thumb {
-            background: #1a1a1a;
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 2px;
         }
+        
         .video-card {
             flex-shrink: 0;
-            width: 260px;
+            width: 240px;
             aspect-ratio: 9 / 16;
             overflow: hidden;
             cursor: pointer;
             position: relative;
-            background: #111;
-            border-radius: 14px; /* Soft TikTok Style Edge */
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: #111111;
+            border-radius: 12px; /* Authentic rounded edges from design */
             scroll-snap-align: center;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
         }
+
         .video-card:hover, .video-card.auto-playing {
-            transform: scale(1.03) translateY(-4px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+            transform: scale(1.04);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
         }
+        
         .video-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 4s linear, filter 0.3s ease;
+            filter: brightness(85%);
+            transition: transform 3s ease, filter 0.3s ease;
         }
+
         .video-card:hover img, .video-card.auto-playing img {
-            transform: scale(1.12);
-            filter: brightness(80%);
+            transform: scale(1.08);
+            filter: brightness(70%);
         }
+        
         .video-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 40%);
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%);
             display: flex;
             align-items: center;
             justify-content: center;
+            pointer-events: none;
         }
+        
         .video-stats {
-            color: white;
+            color: #ffffff;
             display: flex;
             align-items: center;
             gap: 6px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 8px 16px;
-            border-radius: 30px;
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 6px 14px;
+            border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.1);
-            font-size: 1.05rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
+            backdrop-filter: blur(5px);
         }
+        
+        .view-count {
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        
         .carousel-button {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: #f5f2eb;
-            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 50%;
-            width: 46px;
-            height: 46px;
+            width: 44px;
+            height: 44px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             transition: all 0.2s ease;
         }
-        .carousel-button:hover {
-            background: #1a1a1a;
-        }
-        .carousel-button:hover svg {
-            stroke: #f5f2eb;
-        }
-        .carousel-button-left { left: -10px; }
-        .carousel-button-right { right: -10px; }
         
-        @media (max-width: 767px) {
+        .carousel-button:hover {
+            background: #ffffff;
+        }
+
+        .carousel-button:hover .carousel-button-icon {
+            color: #000000;
+        }
+        
+        .carousel-button-left { left: 0px; }
+        .carousel-button-right { right: 0px; }
+        
+        .carousel-button-icon {
+            width: 18px;
+            height: 18px;
+            color: #ffffff;
+        }
+
+        /* Testimonial Block Layout styling matching image text layout */
+        .testimonial-section {
+            padding: 100px 0;
+            background: #000000;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-text {
+            font-size: 1.15rem;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 400;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .testimonial-author {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #ffffff;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        /* Monochromatic Infinite Partner Grid logo strip styling */
+        .brand-logos-section {
+            padding: 40px 0 80px 0;
+            background: #000000;
+            text-align: center;
+        }
+
+        .brand-logos-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            opacity: 0.4; /* Styled to replicate the muted clean look */
+            filter: brightness(0) invert(1);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .mock-logo-node {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 10px;
+        }
+
+        /* High-End Soft Minimalist Footer Block */
+        .footer-contact {
+            background: #e8e5dd; /* Exact warm sand tone from bottom of original site design */
+            color: #000000;
+            padding: 100px 0;
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-title {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-links-box {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-top: 10px;
+        }
+
+        .footer-links-box a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-links-box a:hover {
+            opacity: 0.6;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-tagline { font-size: 1.3rem; }
+            .main-stat-number { font-size: 3.5rem; }
+            .sub-stats-grid { grid-template-columns: 1fr; gap: 30px; }
+            .sub-stat-item::after { display: none; }
             .carousel-button { display: none; }
-            .carousel-wrapper { padding: 0; }
+            .carousel-container { padding: 0; }
+            .testimonial-text { font-size: 1rem; }
+            .footer-grid { flex-direction: column; gap: 40px; }
+            .footer-links-box { text-align: left; }
         }
     </style>
 </head>
 <body>
 
-    <div class="carousel-wrapper">
-        <button class="carousel-button carousel-button-left" onclick="scrollLeft()" aria-label="Left">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </button>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
         
-        <div class="carousel" id="canvaCarousel">
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=500">
-                <div class="video-overlay"><div class="video-stats">26M</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500">
-                <div class="video-overlay"><div class="video-stats">13.4M</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?w=500">
-                <div class="video-overlay"><div class="video-stats">11.5M</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=500">
-                <div class="video-overlay"><div class="video-stats">9.4M</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500">
-                <div class="video-overlay"><div class="video-stats">14.3M</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=500">
-                <div class="video-overlay"><div class="video-stats">23.3K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500">
-                <div class="video-overlay"><div class="video-stats">20.3K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500">
-                <div class="video-overlay"><div class="video-stats">16.7K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=500">
-                <div class="video-overlay"><div class="video-stats">45.1K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500">
-                <div class="video-overlay"><div class="video-stats">32.4K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=500">
-                <div class="video-overlay"><div class="video-stats">12.8K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500">
-                <div class="video-overlay"><div class="video-stats">95.3K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=500">
-                <div class="video-overlay"><div class="video-stats">112K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=500">
-                <div class="video-overlay"><div class="video-stats">8.4K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=500">
-                <div class="video-overlay"><div class="video-stats">220K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=500">
-                <div class="video-overlay"><div class="video-stats">14.1K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=500">
-                <div class="video-overlay"><div class="video-stats">63.9K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=500">
-                <div class="video-overlay"><div class="video-stats">10.5K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500">
-                <div class="video-overlay"><div class="video-stats">88.1K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500">
-                <div class="video-overlay"><div class="video-stats">5.2K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=500">
-                <div class="video-overlay"><div class="video-stats">44K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500">
-                <div class="video-overlay"><div class="video-stats">19.3K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=500">
-                <div class="video-overlay"><div class="video-stats">106K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=500">
-                <div class="video-overlay"><div class="video-stats">2.4M</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500">
-                <div class="video-overlay"><div class="video-stats">75.2K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=500">
-                <div class="video-overlay"><div class="video-stats">8.9K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500">
-                <div class="video-overlay"><div class="video-stats">331K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=500">
-                <div class="video-overlay"><div class="video-stats">14.2K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500">
-                <div class="video-overlay"><div class="video-stats">9.3K</div></div>
-            </div>
-            <div class="video-card" onclick="window.open('YOUR_TIKTOK_LINK_HERE', '_blank')">
-                <img src="https://images.unsplash.com/photo-1506084868230-bb9d95c24759?w=500">
-                <div class="video-overlay"><div class="video-stats">115K</div></div>
-            </div>
-        </div>
+        function PortfolioApp() {
+            const carouselRef = useRef(null);
+            const [autoPlayedIndex, setAutoPlayedIndex] = useState(null);
 
-        <button class="carousel-button carousel-button-right" onclick="scrollRight()" aria-label="Right">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </button>
-    </div>
-
-    <script>
-        const carousel = document.getElementById('canvaCarousel');
-        let initialPlaybackTriggered = false;
-
-        function scrollLeft() {
-            carousel.scrollBy({ left: -284, behavior: 'smooth' });
-        }
-
-        function scrollRight() {
-            carousel.scrollBy({ left: 284, behavior: 'smooth' });
-        }
-
-        // Native layout tracker calculates exactly which card sits in the absolute middle of the screen
-        function checkMiddleCard() {
-            if (initialPlaybackTriggered) return; // Keeps it from repeating after playing once
-            
-            const cards = document.querySelectorAll('.video-card');
-            const carouselCenter = carousel.scrollLeft + (carousel.offsetWidth / 2);
-            
-            let closestCard = null;
-            let minDifference = Infinity;
-
-            cards.forEach((card) => {
-                const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
-                const diff = Math.abs(carouselCenter - cardCenter);
-                if (diff < minDifference) {
-                    minDifference = diff;
-                    closestCard = card;
-                }
-            });
-
-            if (closestCard) {
-                // Clear any existing active class tags
-                cards.forEach(c => c.classList.remove('auto-playing'));
-                // Trigger the middle preview play state
-                closestCard.classList.add('auto-playing');
-                initialPlaybackTriggered = true;
-            }
-        }
-
-        // Wipe the auto-play class completely as soon as the user starts interaction
-        carousel.addEventListener('mouseenter', () => {
-            document.querySelectorAll('.video-card').forEach(c => c.classList.remove('auto-playing'));
-        }, { once: true });
-
-        // Wait brief delay for Canva frame layout initialization to settle 
-        setTimeout(checkMiddleCard, 500);
-        carousel.addEventListener('scroll', checkMiddleCard);
-    </script>
-</body>
-</html>
+            // Remapped data objects containing your 23 custom links and metrics
+            const tiktokVideos = [
+                { id: 1, clickUrl: 'https://www.tiktok.com/@dashburgerdublin/video/7246412323764636954', cover: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500', views: '14.3M' },
+                { id: 2, clickUrl: 'https://www.tiktok.com/@dashburgerdublin/video/7175089190856559878', cover: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=500', views: '26.1M' },
+                { id: 3, clickUrl: 'https://www.tiktok.com/@dashburgerdublin/video/7238968276456459547', cover: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=500', views: '475.8K' },
+                { id: 4, clickUrl: 'https://www.tiktok.com/@dashburgerdublin/video/7112050339410398469', cover: 'https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500', views: '2.1M' },
+                
+                { id: 5, clickUrl: 'https://www.tiktok.com/@jackiesdublin/video/7182222358105574662', cover: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500', views: '9.5M' },
+                { id: 6, clickUrl: 'https://www.tiktok.com/@jackiesdublin/video/7096461898694020358', cover: 'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=500', views: '11.5M' },
+                { id: 7, clickUrl: 'https://www.tiktok.com/@jackiesdublin/video/7212962776996793606', cover: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500', views: '9.4M' },
+                { id: 8, clickUrl: 'https://www.tiktok.com/@jackiesdublin/video/7216008207511096602', cover: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=500', views: '2.8M' },
+                { id: 9, clickUrl: 'https://www.tiktok.com/@jackiesdublin/video/7188163828243385605', cover: 'https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=500', views: '13.4M' },
+                { id: 10, clickUrl: 'https://www.tiktok.com/@jackiesdublin/video/7098377153057770757', cover: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=500', views: '1.1M' },
+                
+                { id: 11, clickUrl: 'https://www.tiktok.com/@antisocialdublin/video/7185473707467377926', cover: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500', views: '9.4M' },
+                { id: 12, clickUrl: 'https://www.tiktok.com/@antisocialdublin/video/7180070716115553542', cover: 'https://images.unsplash.com/photo-1511105612320-2e62a04dd044?w=500', views: '1.2M' },
+                { id: 13, clickUrl: 'https://www.tiktok.com/@antisocialdublin/video/7199198668077993221', cover: 'https://images.unsplash.com/photo-1574096079513-d8259312b785?w=500', views: '3M' },
+                
+                { id: 14, clickUrl: 'https://www.tiktok.com/@southwilliamclinic/video/7298796768039423265', cover: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500', views: '17.1M' },
+                
+                { id: 15, clickUrl: 'https://www.tiktok.com/@bunsen.burgers/video/7468207737369808150', cover: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500', views: '2.8M' },
+                { id: 16, clickUrl: 'https://www.tiktok.com/@bunsen.burgers/video/7365906722373815584', cover: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=500', views: '3.9M' },
+                { id: 17, clickUrl: 'https://www.tiktok.com/@bunsen.burgers/video/7363998188132437281', cover: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=500', views: '4.3M' },
+                { id: 18, clickUrl: 'https://www.tiktok.com/@bunsen.burgers/video/7348784671888510241', cover: 'https://images.unsplash.com/photo-1550317138-10000687a72b?w=500', views: '2.1M' },
+                
+                { id: 19, clickUrl: 'https://www.tiktok.com/@theharbourbarbray/video/7122485393760488709', cover: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=500', views: '7M' },
+                { id: 20, clickUrl: 'https://www.tiktok.com/@theharbourbarbray/video/7050108535270608134', cover: 'https://images.unsplash.com/photo-1485686531765-ba63b07845a7?w=500', views: '2M' },
+                { id: 2
